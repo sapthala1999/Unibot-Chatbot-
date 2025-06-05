@@ -1,0 +1,52 @@
+{
+  "admissions": {
+    "deadlines": "15th July 2025",
+    "requirements": "Minimum 3 A/L passes and English proficiency"
+  },
+  "programs": [
+    {
+      "name": "BSc in Software Engineering",
+      "fee": "Rs. 300,000 per year",
+      "requirements": "A/L passes in Mathematics and Physics"
+    },
+    {
+      "name": "BA in Business Administration",
+      "fee": "Rs. 250,000 per year",
+      "requirements": "A/L passes in Commerce or Business Studies"
+    },
+    {
+      "name": "BSc in Data Science",
+      "fee": "Rs. 320,000 per year",
+      "requirements": "A/L passes in Mathematics and Statistics"
+    },
+    {
+      "name": "Diploma in ICT",
+      "fee": "Rs. 100,000 total",
+      "requirements": "O/L pass with Mathematics"
+    },
+    {
+      "name": "Diploma in English",
+      "fee": "Rs. 90,000 total",
+      "requirements": "O/L pass in English"
+    }
+  ],
+  "facilities": [
+    "Library with 1,000+ books",
+    "Computer labs with latest software",
+    "Sports complex and gym",
+    "Student cafeteria and common rooms"
+  ],
+  "opening_hours": "Monday to Friday 8:30 AM - 5:00 PM",
+  "faculties": [
+    "Faculty of Computing",
+    "Faculty of Business",
+    "Faculty of Arts",
+    "Faculty of Science"
+  ],
+  "contact": {
+    "phone": "+94 11 2345678",
+    "email": "info@vertexuniversity.ac.lk"
+  },
+  "location": "123 University Road, Colombo, Sri Lanka",
+  "history": "Vertex University was founded in 2005 to empower students with practical education."
+}

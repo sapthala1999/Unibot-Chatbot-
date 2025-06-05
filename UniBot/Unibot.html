@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vertex University Chatbot</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0b1a38;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      width: 600px;
+      max-width: 90%;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-header {
+      background: #101d40;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .chat-header h2 {
+      color: white;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+
+    .bot-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .back-btn {
+      position: absolute;
+      right: 20px;
+      background: #811f2d;
+      border: none;
+      color: white;
+      padding: 6px 15px;
+      border-radius: 10px;
+      font-style: italic;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-input {
+      background: #1c1f2e;
+      padding: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex-grow: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #d3d3d3;
+      font-size: 16px;
+    }
+
+    .chat-input button {
+      background: #555;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 10px;
+      font-size: 16px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: #4caf50;
+      color: white;
+      border-top-right-radius: 0;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      background-color: #2b2d42;
+      color: white;
+      border-top-left-radius: 0;
+    }
+
+  
+      .page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  height: 100vh;
+  padding: 20px;
+  overflow: hidden;
+}
+.bot-avatar{
+  width: 280px;
+  height: 280px;
+}
+.bot-hedder{
+  font-size: 25px;
+  font-family: 'Times New Roman';
+  color: white; 
+}
+@keyframes popup {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+  }
+}
+.bot {
+  animation: popup 0.6s ease-out;
+}
+.mode-btn {
+  position: absolute;
+  right: 70px;
+  top:10px;
+  background: #f8f9f9;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Day mode styles */
+.day-mode {
+  background: #e0f7fa;
+  color: #000;
+}
+
+.day-mode .chat-container {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.day-mode .chat-header {
+  background: #00acc1;
+}
+
+.day-mode .chat-box {
+  color: #000;
+}
+
+.day-mode .chat-input {
+  background: #b2ebf2;
+}
+
+.day-mode .chat-input input {
+  background: #ffffff;
+  color: #000;
+}
+
+.day-mode .chat-input button {
+  background: #00796b;
+}
+
+.day-mode .user-message {
+  background-color: #aed581;
+  color: #000;
+}
+
+.day-mode .bot-message {
+  background-color: #81d4fa;
+  color: #000;
+}
+
+.day-mode .bot-hedder {
+  color: #000;
+}
+.message-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.message-actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.message-actions button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.message-content[contenteditable="true"] {
+  border: 1px dashed #aaa;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="bot">
+      <h3 class="bot-hedder">Hi.. I'm Unibot.. You can ask any questions..</h3>
+      <img src="cb.png" alt="Chatbot" class="bot-avatar" />
+    </div>
+    <button class="mode-btn" onclick="toggleMode()">🌞</button>
+    <div class="chat-container">
+      <div class="chat-header">
+        <img src="cb.png" alt="Chatbot Icon" class="bot-icon" />
+        <h2>Vertex UniBot</h2>
+        <button class="back-btn" onclick="window.location.href='University.html'">Back</button>
+      </div>
+      <div class="chat-box" id="chat-box"></div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="user-input"
+          placeholder="Type your message..."
+          onkeydown="if(event.key === 'Enter') sendMessage()"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleMode() {
+      const body = document.body;
+      const button = document.querySelector('.mode-btn');
+      body.classList.toggle('day-mode');
+      button.textContent = body.classList.contains('day-mode') ? '🌙' : '🌞';
+    }
+
+    function copyMessage(button) {
+      const msg = button.closest('.message').querySelector('.message-content');
+      const text = msg.innerText;
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          button.textContent = '✅';
+          setTimeout(() => (button.textContent = '📋'), 1500);
+        })
+        .catch(() => alert('Copy failed!'));
+    }
+
+    const MODEL = 'gemini-1.5-flash';
+    const GEMINI_API_KEY = 'AIzaSyD6A4LQeB3hQ8khnDn6vJj0bBGcMcuy4CY';
+
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+
+    let universityData = {};
+
+    fetch('traning.json')
+      .then((res) => res.json())
+      .then((data) => {
+        universityData = data;
+      })
+      .catch((err) => console.error('Failed to load university data:', err));
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.className = `message ${sender}-message`;
+      msg.innerHTML = `
+        <div class="message-content">${text}</div>
+        <div class="message-actions">
+          <button onclick="copyMessage(this)">📋</button>
+        </div>
+      `;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    const casualResponses = {
+      hi: ["Hello!", "Hi there!", "Hey! How can I help you?", "Hi! Nice to see you!"],
+      "how are you": ["I'm doing great, thanks!", "I'm fine, how about you?", "All good here! What about you?"],
+      hello: ["Hello!", "Hi there!", "Hey! How can I help you?", "Hi! Nice to see you!"],
+      hey: ["Hey!", "Hey there!", "Hello!"],
+      "hi there": ["Hi there!", "Hello! How can I help you?", "Hey!"],
+      "thank you": ["You're welcome!", "No problem!", "Glad I could help!", "Anytime!"],
+      thanks: ["You're welcome!", "Happy to help!", "No worries!", "My pleasure!"],
+      "good morning": ["Good morning! How can I assist you today?", "Morning! What can I do for you?"],
+      "good night": ["Good night! Sleep well!", "Sweet dreams!"],
+      bye: ["Goodbye!", "See you later!", "Take care!"]
+    };
+
+    function checkCasualResponses(message) {
+      const msg = message.toLowerCase();
+      for (const key in casualResponses) {
+        if (msg.includes(key)) {
+          const responses = casualResponses[key];
+          return responses[Math.floor(Math.random() * responses.length)];
+        }
+      }
+      return null;
+    }
+
+    function handleLocalQuestions(msg) {
+      if (!universityData || Object.keys(universityData).length === 0) return null;
+      msg = msg.toLowerCase();
+
+      if (msg.includes('admission')) {
+        return `Admission deadlines: ${universityData.admissions.deadlines}. Requirements: ${universityData.admissions.requirements}`;
+      }
+
+      if (msg.includes('course') || msg.includes('program') || msg.includes('fee') || msg.includes('requirements')) {
+        for (const program of universityData.programs) {
+          if (msg.includes(program.name.toLowerCase())) {
+            return `${program.name} costs ${program.fee}. Requirements: ${program.requirements}.`;
+          }
+        }
+
+        if (msg.includes('fee')) {
+          return universityData.programs.map(p => `${p.name}: ${p.fee}`).join('\n');
+        }
+
+        if (msg.includes('requirement')) {
+          return universityData.programs.map(p => `${p.name}: ${p.requirements}`).join('\n');
+        }
+
+        return `Offered programs: ${universityData.programs.map(p => p.name).join(', ')}.`;
+      }
+
+      if (msg.includes('facility')) {
+        return `Our facilities include: ${universityData.facilities.join(', ')}.`;
+      }
+
+      if (msg.includes('opening')) {
+        return `Our opening hours are: ${universityData.opening_hours}.`;
+      }
+
+      if (msg.includes('contact') || msg.includes('email') || msg.includes('phone')) {
+        return `Phone: ${universityData.contact.phone}, Email: ${universityData.contact.email}`;
+      }
+
+      if (msg.includes('faculty')) {
+        return `Faculties: ${universityData.faculties.join(', ')}.`;
+      }
+
+      if (msg.includes('location') || msg.includes('address')) {
+        return `Vertex University is located at ${universityData.location}.`;
+      }
+
+      if (msg.includes('history') || msg.includes('founded')) {
+        return universityData.history || "Sorry, I don't have the history info.";
+      }
+
+      return null;
+    }
+
+    async function callGeminiAPI(prompt) {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+
+      const data = await response.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't understand that.";
+    }
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user');
+      userInput.value = '';
+
+      const banned = ['car', 'movie', 'food', 'hospital', 'game', 'politics', 'president'];
+      if (banned.some(word => message.toLowerCase().includes(word))) {
+        appendMessage("Sorry, I can only answer questions related to Vertex University.", 'bot');
+        return;
+      }
+
+      const casual = checkCasualResponses(message);
+      if (casual) {
+        appendMessage(casual, 'bot');
+        return;
+      }
+
+      const local = handleLocalQuestions(message);
+      if (local) {
+        appendMessage(local, 'bot');
+        return;
+      }
+
+      try {
+        const res = await fetch('bot-response.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'message=' + encodeURIComponent(message)
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          appendMessage(data.reply, 'bot');
+        } else {
+          appendMessage('Typing...', 'bot');
+          const geminiReply = await callGeminiAPI(message);
+          chatBox.lastChild.remove();
+          appendMessage(geminiReply, 'bot');
+        }
+      } catch (error) {
+        appendMessage('Sorry, there was an error processing your request.', 'bot');
+      }
+    }
+  </script>
+</body>
+</html>

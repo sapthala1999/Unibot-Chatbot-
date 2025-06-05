@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vertex UniBot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: url('HP.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      position: absolute;
+      top: 20px;
+      left: 15%;
+      text-align: center;
+      font-size: 6rem;
+      color: white;
+      width: 70%;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .logo {
+      position: absolute;
+      top: 60px;
+      left: 130px;
+      height: auto;
+    }
+
+    .logo img {
+      width: 100px;
+    }
+
+    .bot {
+      position: absolute;
+      top: 30px;
+      right: 100px;
+      width: 120px;
+      height: auto;
+    }
+
+    .content {
+      position: absolute;
+      top: 40%;
+      left: 5%;
+      max-width: 500px;
+      color: white;
+    }
+
+    .content p {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .content-footer p {
+      font-size: 1rem;
+      line-height: 2.5;
+      text-align: center;
+      width: 120%;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 70%;
+      right: 3%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      color: white;
+      width: 320px;
+    }
+
+    .login-box h2 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .login-box input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .show-password {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #c69c4e;
+    }
+
+    .show-password input {
+      margin-right: 10px;
+      margin-top: 6px;
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .login-btn, .signup-btn {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      font-size: 1rem;
+      font-style: italic;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .login-btn {
+      background: darkred;
+    }
+
+    .signup-btn {
+      background: darkgray;
+    }
+
+    .login-btn:hover {
+      background: red;
+    }
+
+    .signup-btn:hover {
+      background: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="overlay"></div>
+    <h1>Welcome to Vertex UniBot <span>🎓</span></h1>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+    <img src="cb.png" alt="Vertex University bot" class="bot">
+
+    <div class="content">
+      <p>
+        Vertex University is committed to providing seamless support for students and visitors.
+        Our service chatbot helps with general inquiries, admission guidelines, appointment bookings,
+        and fee-related information. With quick responses and 24/7 availability, we ensure a smooth
+        and efficient experience for everyone.
+      </p>
+      <div class="content-footer">
+        <p>
+          -------------------------------------------------------------------------------<br>
+          "Welcome to the Vertex University Service chatbot - Your Virtual Assistant for quick inquiries, admission, and University information!"
+        </p>
+      </div>
+    </div>
+
+    <div class="login-box">
+      <h2>User Name</h2>
+      <form action="Loging.php" method="post">
+        <input type="text" name="username" placeholder="User Name" required>
+        <div class="password-section">
+          <input type="password" name="password" placeholder="Password" id="password" required>
+          <div class="show-password">
+            <input type="checkbox" id="show-password">
+            <label for="show-password"> Show Password</label>
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="login-btn">Login</button>
+          <button type="button" class="signup-btn" id="signupBtn">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Password show toggle
+    document.getElementById("show-password").addEventListener("change", function () {
+      let passwordField = document.getElementById("password");
+      passwordField.type = this.checked ? "text" : "password";
+    });
+
+    // Sign up button
+    document.getElementById("signupBtn").addEventListener("click", function () {
+      window.location.href = "signup.html";
+    });
+  </script>
+</body>
+</html>
